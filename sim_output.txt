@@ -1,0 +1,37 @@
+============================================================================================================
+Offcut reuse simulator: synthetic plate workload (seed 7, 26 weeks)
+============================================================================================================
+4197 parts in 58 drawing releases across 12 projects. Edge margin 15 mm, kerf 4 mm, minimum offcut length 600 mm.
+
+Plate parts produced: 598.4 t (identical under every policy)
+
+1) Prime plate needed under each reuse policy
+Policy           Prime t  Prime t per  vs no_reuse   Offcuts used       of which   Scrap t     Offcut stock
+                           t of parts                     (n / t)   cross-proj t             at end (n / t)
+------------------------------------------------------------------------------------------------------------
+no_reuse           878.8        1.469         0.0%        0 / 0.0            0.0     123.5      164 / 156.9
+same_project       767.6        1.283       -12.7%    103 / 114.6            0.0     127.7        57 / 41.5
+pooled             738.0        1.233       -16.0%    131 / 123.0          101.5     130.2         19 / 9.4
+
+   Same-project reuse needs 12.7% less prime plate than no reuse.
+   Pooled reuse needs 16.0% less than no reuse, and 3.9% less than same-project reuse.
+   That last gap (29.7 t here) is what the cross-project transfer rule is worth.
+   Steel moved between projects under pooling: 101.5 t. This is the tonnage Cost Control would need to price.
+
+2) Effect of the minimum offcut length rule (pooled policy)
+Min length mm      Prime t   Prime t per t parts  Offcuts used (n)   Offcuts in stock at end (n / t)
+----------------------------------------------------------------------------------------------------
+300                  738.0                 1.233               133                         77 / 15.8
+600                  738.0                 1.233               131                          19 / 9.4
+1200                 745.9                 1.246               117                           6 / 6.3
+2000                 755.0                 1.262               102                           3 / 3.2
+   A low threshold keeps more steel but fills the yard with small pieces
+   to label, store and find. This is the trade-off to agree with the nesting lead.
+
+3) Mass balance check (steel in = parts + scrap + offcuts kept)
+   no_reuse       difference +0.000000 t  OK
+   same_project   difference +0.000000 t  OK
+   pooled         difference +0.000000 t  OK
+
+Synthetic data. Read the relative differences between policies, not the absolute waste figures.
+============================================================================================================
