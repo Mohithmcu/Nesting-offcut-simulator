@@ -1,49 +1,4 @@
-"""
-Offcut reuse simulator for plate nesting (prototype for an FDE case study).
 
-What this proves
-----------------
-The case study claims two things that can be tested on synthetic data:
-
-  1. Using offcuts before opening new plates cuts the prime plate needed per
-     tonne of parts, and the saving is measurable with the same metric the
-     pilot uses ("prime plate drawn into nests per tonne of plate parts").
-  2. Letting offcuts move between projects (which today is blocked by
-     per-project cost loading) adds a further saving on top of same-project
-     reuse. The size of that gap is what the cost team needs to decide the
-     transfer rule.
-
-It also shows how the minimum offcut size rule changes the result, since that
-rule has to be agreed with the nesting lead.
-
-What this does NOT prove
-------------------------
-The data is synthetic. The absolute waste percentages are not a real plant's,
-and nothing here is a forecast of their savings.
-The point is the mechanism and the relative size of the three policies. Real
-numbers come from a loss ledger built on the fabricator's own nesting data.
-
-How it works
-------------
-- Projects release drawings over 26 weeks. Each release is a batch of plate
-  parts of mixed thickness.
-- Parts are nested with a MaxRects packer (bottom-left, length-first), with an
-  edge margin on every sheet and a kerf allowance around every part. Parts that
-  need grain alignment are not rotated.
-- After a sheet is nested, the unused end of the plate (full width, beyond the
-  last part) is cut off. If it meets the minimum offcut size it goes into stock;
-  otherwise it is scrap. Everything else left on the sheet is scrap.
-- Three policies are compared on the same workload:
-    no_reuse      offcuts are kept but never used again
-    same_project  offcuts can only be used by the project that created them
-    pooled        offcuts can be used by any project
-- Every run is checked with a mass balance (steel in = parts + scrap +
-  offcuts kept), the same reconciliation the loss ledger relies on.
-
-Run:  python nesting_offcut_simulator.py            (default seed 7)
-      python nesting_offcut_simulator.py --seed 11  (another workload)
-Needs only the Python standard library (3.8+).
-"""
 
 import argparse
 import random
